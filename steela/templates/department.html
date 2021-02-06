@@ -1,0 +1,134 @@
+{% include 'temp/temp.html'   %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+
+     <header>
+      <div class="collapse bg-secondary" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+               <div class="col-sm-8 col-md-7 py-4">
+              
+                        <div style="margin:20px">
+                        <form method="post">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Departman ismi</label>
+                                <input name="first_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Personel İsmi" required>
+                                 </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Personel Soyİsmi</label>
+                                <input name="last_name"  class="form-control" id="exampleInputPassword1" placeholder="Personel Soyİsmi" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1"> Departman</label>
+                                <input name="department" class="form-control" id="exampleInputPassword1" placeholder="Departman" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Mail</label>
+                                <input name="mail" type="mail" class="form-control" id="exampleInputPassword1" placeholder="Mail" required>
+                            </div>
+  
+                          <div class="form-group">
+                             <label for="exampleInputPassword1">Şifre</label>
+                              <input type="password" class="form-control" name="password" placeholder="Şifre" required="required">
+                          </div>
+                          <div class="form-group">
+                              <label for="exampleInputPassword1">Şifre tekrar</label>
+                              <input type="password" class="form-control" name="confirm_password" placeholder="Şifre tekrar" required="required">
+                          </div>      
+                            <button type="submit" class="btn btn-primary float-right">Ekle</button>
+                        </form>
+                    </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+             <strong>Departman oluştur</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+        <section>
+
+          <div  style="margin:10px" class="card-group ">
+            <div class="card text-white bg-info m-2 ml-1" style="max-width: 26rem;">
+            <div class="card-header text-center">İNSAN KAYNAKALRI</div>
+          
+            <div class="card-body">
+        
+                
+          <br><br><br><br>
+                
+              </div>
+                <div class="mb-6"><button class="btn btn-block btn-success ">Rapor Çıkart</button></div>
+             </div>
+            
+            <div class="card text-white bg-info m-2 ml-1" style="max-width: 26rem;">
+            <div class="card-header text-center">SATIN ALIM</div>
+          
+            <div class="card-body">
+                
+              <br><br><br><br>
+                
+              </div>
+                <div class="mb-6"><button class="btn btn-block btn-success ">Rapor Çıkart</button></div>
+             </div>
+            
+            <div class="card text-white bg-info m-2 ml-1" style="max-width: 26rem;">
+            <div class="card-header text-center">Hazırlanan</div>
+          
+            <div class="card-body">
+                <br><br><br><br>
+                
+              </div>
+                <div class="mb-6"><button class="btn btn-block btn-success ">Rapor Çıkart</button></div>
+
+             </div>
+          </div>
+        </section>
+
+
+
+
+
+    </main>
+
+
+   
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+  <hr>
+    <h4>STEELA</h4>
+    <p class="text-center">Powered by <a href="" target="_blank">@Steela Software</a></p>
+  </footer>
+
+  <!-- End page content -->
+ </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,166 @@
+{% include 'temp/temp_warehouse.html'   %}
+<!DOCTYPE html>
+<html>
+<title>Steela</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <br>
+
+    <div  style="margin:35px" class="card-group ">
+            <div class="card text-white bg-primary mb-2 ml-1  " style="max-width: 18rem;">
+            <div class="card-header text-center">Toplam Ürün</div>
+            <div class="card-body">
+             <!--   <h5 class="card-title ">Toplam Personel Sayısını Göstermektedir.</h5> -->
+                <canvas id="all_product" width="400" height="200"></canvas> </div>
+            </div>
+
+
+            <div class="card text-white bg-success mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Toplam Sipariş Kutusu</div>
+
+            <div class="card-body">
+      
+               <canvas id="box_num" width="400" height="200"></canvas></div>
+                <!-- <h5 class="card-title">Alınmış Toplam Siaprişi Göstermektedir.</h5> -->
+            </div>
+
+
+            <div class="card text-white bg-warning mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Depodaki Toplam Ürün Sayısı</div>
+            <div class="card-body">
+                
+  
+               <canvas id="sum_all_product" width="400" height="200"></canvas></div>
+             </div>
+             
+           <div class="card text-white bg-dark mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Rapor Çıkart</div>
+
+       
+            <div class="card-body">
+                    <br><br><br>
+                    <form method="POST" target="_blank">
+                    {% csrf_token %}
+                  <button target="_blank" name="raport_pdf_view" type="submit" class="btn btn-danger btn-block"> Raporu Göster</button>
+                  <button name="raport_pdf_download" type="submit" class="btn btn-danger btn-block">  Raporu İndir</button>
+                    </form>
+             </div>
+              </div>
+         
+  
+    </div>
+</body>
+
+<script>
+
+Chart.pluginService.register({
+    beforeDraw: function (chart) {
+        var width = chart.chart.width,
+            height = chart.chart.height,
+            ctx = chart.chart.ctx;
+        ctx.restore();
+        var fontSize = (height / 114).toFixed(2);
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "middle";
+        var text = chart.config.options.elements.center.text,
+            textX = Math.round((width - ctx.measureText(text).width) / 2),
+            textY = height / 2;
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+    }
+});
+
+
+
+// chart
+var data = {
+    labels: ["Not Sayısı"],
+    datasets: [{
+        data: [{{warehouse_box}}],
+        backgroundColor: ["#9400D3"],
+        hoverBackgroundColor: ["#9400D3"]
+    }]
+};
+var promisedDeliveryChart = new Chart(document.getElementById("box_num"), {
+    type: 'doughnut',
+    data: data,
+    options: {
+        elements: {
+            center: {
+                text: {{warehouse_box}} //set as you wish
+            }
+        },
+        cutoutPercentage: 75,
+        legend: {
+            display: false
+        }
+    }
+});
+
+// chart
+var data = {
+    labels: ["Not Sayısı"],
+    datasets: [{
+        data: [{{all_product}}],
+        backgroundColor: ["#9400D3"],
+        hoverBackgroundColor: ["#9400D3"]
+    }]
+};
+var promisedDeliveryChart = new Chart(document.getElementById("all_product"), {
+    type: 'doughnut',
+    data: data,
+    options: {
+        elements: {
+            center: {
+                text: {{all_product}} //set as you wish
+            }
+        },
+        cutoutPercentage: 75,
+        legend: {
+            display: false
+        }
+    }
+});
+
+
+
+
+// chart
+var data = {
+    labels: ["Not Sayısı"],
+    datasets: [{
+        data: [{{sum_all_product}}],
+        backgroundColor: ["#9400D3"],
+        hoverBackgroundColor: ["#9400D3"]
+    }]
+};
+var promisedDeliveryChart = new Chart(document.getElementById("sum_all_product"), {
+    type: 'doughnut',
+    data: data,
+    options: {
+        elements: {
+            center: {
+                text: {{sum_all_product}} //set as you wish
+            }
+        },
+        cutoutPercentage: 75,
+        legend: {
+            display: false
+        }
+    }
+});
+
+
+</script>
+
+</html>

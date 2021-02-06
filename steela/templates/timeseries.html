@@ -1,0 +1,173 @@
+{% include 'temp/temp.html'   %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+
+     <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">Nasıl Kullanabilirim</h4>
+              
+              <p class="text-muted">Soldaki Tablodan Personelinizi Seçip Sonra Sağ taraftaki sipariş listesinden Personelin teslim etmek istediği Siaparişi Seçebilitrisan</p>
+              <p class="text-muted">Bu işlemi yaptıktan sonra sipariş kutuları ve teslim edecek personeli oluşturmuş oluyorsunuz.Depo yönetim panelinden Depoyu seçtikten sonra sipariş hazır olduğunda depo personeli şipariş teslim edebilir. </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                <li><a href="#" class="text-white">Email me</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm ">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+             <strong>Bilgilendirme: Bu Modülü Nasıl Kullanabilirim.</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+
+
+     <div class="d-md-flex">
+            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-width: 500px; max-height: 550px;">
+               
+            <form method="POST">
+                <div class="card-header text-center bg-primary text-white"> Model Listesi</div>
+                          <div align="center">  
+                             <input type="text" name="search" id="search" class="form-control"  placeholder="Ara"/> 
+
+                            </div>
+                            
+                        <section>
+
+                                <div  style="margin:10px" class="card-group ">
+                                  {% for i in all_warehouse%}
+                                  <div class="card text-white bg-success m-2 ml-1" style="max-width: 26rem;">
+                                   <div class="bg-dark"><span><input style="width:20px; height:20px" type="checkbox" name="id_warehouse" value="{{i.id}}" class=" text-white"> Depo Seç</span></div>
+                                  <div class="card-header text-center">{{i.warehose_name}}</div>
+                                  <div class="card-body">
+                                      <p>{{i.id}}</p>
+                                    <canvas id="myChart2" width="500" height="50"></canvas></div>
+
+                                  </div>
+                                  {% endfor %}
+                                  
+                                </div>
+                      </section>
+                                
+            </div>
+
+            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light"  style="max-width: auto; max-height: 550px;">
+                  <div class="card-header text-center bg-primary text-white"> Tahmin Garfiği</div>
+                        <div align="center">  
+                            <input type="text" name="search" id="search" class="form-control"  placeholder="Ara"/> 
+ 
+                        </div>
+
+
+                                  <section>
+
+                                              <div  style="margin:10px" class="card-group ">
+                                                 <canvas id="line-chart"  width="500" height="300"></canvas> <div class="card-body">
+                                             
+                                              </div>
+                                    </section>
+                                
+               
+            </div>
+    
+        
+      </div>
+                            
+                                  {% csrf_token %} 
+                                  <button name="add_warehouse" type="submit" class="btn btn-info btn-block"> Tahmin Grafiği Oluştur</button>
+                                </form>
+
+
+
+    </main>
+
+
+   
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+  <hr>
+    <h4>STEELA</h4>
+    <p class="text-center">Powered by <a href="" target="_blank">@Steela Software</a></p>
+  </footer>
+
+  <!-- End page content -->
+ </div>
+
+
+
+</div>
+
+
+
+<script>
+
+
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    datasets: [{ 
+        data: [86,114,106,106,107,111,133,221,783,2478],
+        label: "Africa",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [282,350,411,502,635,809,947,1402,3700,5267],
+        label: "Asia",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [168,170,178,190,203,276,408,547,675,734],
+        label: "Europe",
+        borderColor: "#3cba9f",
+        fill: false
+      }, { 
+        data: [40,20,10,16,24,38,74,167,508,784],
+        label: "Latin America",
+        borderColor: "#e8c3b9",
+        fill: false
+      }, { 
+        data: [6,3,2,2,7,26,82,172,312,433],
+        label: "North America",
+        borderColor: "#c45850",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'World population per region (in millions)'
+    }
+  }
+});
+
+
+</script>
+
+
+
+</body>
+
+
+</html>

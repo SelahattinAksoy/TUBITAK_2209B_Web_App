@@ -1,0 +1,257 @@
+{% include 'temp/temp_warehouse.html'   %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+
+     <header>
+      <div class="collapse bg-secondary" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+               <div class="col-sm-8 col-md-7 py-4">
+              
+                       
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+             <strong>Nasıl Kullanırım..</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+
+
+     <div class="d-md-flex">
+            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-width: 500px; max-height: 550px;">
+               
+            <form method="POST">
+                <div class="card-header text-center bg-primary text-white"> ürün  Listesi</div>
+                          <div align="center">  
+                             <input type="text" name="search" id="search" class="form-control"  placeholder="Ara"/> 
+
+                            </div>
+                            
+                        <section>
+
+                               
+                                <div class="container">
+                                  <h2>Geçmiş</h2>
+                                  <div class="card">
+                                    <div class="card-body"></div>
+                                  </div>
+                                  <br>
+                                  <div class="card bg-primary text-white">
+                                    <div class="card-body"></div>
+                                  </div>
+                                  <br>
+                                  <div class="card bg-success text-white">
+                                    <div class="card-body"></div>
+                                  </div>
+                                  <br>
+                                  <div class="card bg-info text-white">
+                                    <div class="card-body"></div>
+                                  </div>
+                                  <br>
+                                  <div class="card bg-warning text-white">
+                                    <div class="card-body"></div>
+                                  </div>
+                                  <br>
+                                  <div class="card bg-danger text-white">
+                                    <div class="card-body"></div>
+                                  </div>
+                                  <br>
+                                  <div class="card bg-secondary text-white">
+                                    <div class="card-body"></div>
+                                  </div>
+                                  <br>
+                                  <div class="card bg-dark text-white">
+                                    <div class="card-body"></div>
+                                  </div>
+                                  <br>
+                                  <div class="card bg-light text-dark">
+                                    <div class="card-body"></div>
+                                  </div>
+                                </div>
+
+                      </section>
+                                
+            </div>
+
+            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light"  style="max-width: auto; max-height: 550px;">
+                  <div class="card-header text-center bg-primary text-white"> Sipariş Kutuları</div>
+                        <div align="center">  
+                            <input type="text" name="search" id="search" class="form-control"  placeholder="Ara"/> 
+ 
+                        </div>
+
+
+                                  <section>
+                                             
+                               <div class="container">
+                                                <h2 style="width:600px">Tüm Sipariş Kutuları</h2>
+                                                  <div align="center">  
+                                                      <input type="text" name="search" id="search" class="form-control"  placeholder="Ara"/> 
+                          
+                                                  </div>
+                                                <div class="card">
+                                                  <div class="card-body">
+
+                                                  
+                                                  </div>
+                                                </div>
+                                                
+                                                <br>
+                                                     
+           
+                                                          {% for i,j in warehouse_box_dict.items %}
+                                                                {% csrf_token %} 
+                                                              <div class="card bg-primary text-white">
+                                                               <div class="bg-dark"><span><input style="width:20px; height:20px" type="checkbox" name="order_box" value="{{i}}" class=" text-white order_box"> Kutu Seç</span></div>
+                                                                <h3 class="text-center"  style="color:black;">{{j.box_name}}<hr></h3>
+                                                                <div class="card-body">
+                                                                 <div class="container">
+                                                                  <div class="row">
+                                                                    <div class="col-sm">
+                                                                      <p>Ürün İsmi</p><hr class="bg-white">
+                                                                      {% for obj in j.product_name_list %}
+
+                                                                                  <p>{{obj}}</p>
+                                                                        {% endfor %}
+                                                          
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="col-sm">
+                                                                        <p>Ürün Adedi</p><hr class="bg-white">
+                                                                        {% for obj in j.product_amount_list %}
+
+                                                                                  <p>{{obj}}</p>
+                                                                        {% endfor %}
+                                                                    </div>  <hr>
+                                                                  
+                                                                    <div class="col-sm">
+                                                                    <div class="col-sm">
+                                                                        <p> Fiyat</p><hr class="bg-white">
+                                                                        {% for obj in j.product_price_list %}
+
+                                                                                  <p>{{obj}}</p>
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                    </div>
+                                                                  </div>
+                                                                  </div>
+                                                                
+                                                                 </div>
+                                                                  
+                                                                      {% csrf_token %}
+                                                                      <input name="fatura_detaya" style="visibility:hidden" value="{{j}}" >
+                                                                      <button target="_blank" name="pdf_view" type="submit" class="btn btn-danger float-right m-1">Fatura Göster</button>
+                                                                      <button target="_blank" name="pdf_download" type="submit" class="btn btn-danger float-right m-1">Faturayı İndir</button>
+
+                                                           
+                                                </div> <br>
+                                                  {% endfor %}
+                                               
+                                               
+                                       
+                                    </section>
+
+                                    
+                                
+               
+            </div>
+    
+        
+      </div>
+                            
+                                  {% csrf_token %} 
+                                   
+                                  <button id="ready" name="warehouse_orderbox_ready"  class="btn btn-info btn-block"> Siparişi Hazır Onayla</button>
+                                </form>
+
+
+
+
+    </main>
+
+
+   
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+  <hr>
+    <h4>STEELA</h4>
+    <p class="text-center">Powered by <a href="" target="_blank">@Steela Software</a></p>
+  </footer>
+
+  <!-- End page content -->
+ </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+
+    var csrf=$("input[name=csrfmiddlewaretoken]").val()
+    $('#ready').click(function (e) {
+      
+        
+
+        var result_data=[]
+        $('.order_box:checkbox:checked').each(function() {
+            selected.push($(this).attr('value'));
+        });
+        //alert(selected);
+       
+        e.preventDefault();
+        var x=$(this).val();
+        var prev= $(x).text();
+        //alert(x);
+
+        $.ajax({
+
+        url:"",
+        type:"post",
+        data:{
+          id:$(this).val(),
+          value:
+          csrfmiddlewaretoken:csrf
+        },
+        success:function(data){
+      
+             alert(data.x);
+         
+                     
+        }
+      });
+
+    });
+
+    
+
+  
+</script>
+
+</html>

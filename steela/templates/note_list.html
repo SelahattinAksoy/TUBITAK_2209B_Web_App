@@ -1,0 +1,108 @@
+
+{% include 'temp/temp.html'   %}
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+
+
+<body>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <div style="margin:20px">
+          <header>
+                <div class="collapse bg-secondary" id="navbarHeader">
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-md-7 py-4">
+                        
+                                    <div style="margin:20px">
+                                    <form method="post">
+                                    {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Not Başlığı</label>
+                                            <input name="note_head" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Not Başlığını Giriniz" required>
+                                        </div>
+                                   
+                                        <label for="exampleInputEmail1">Not</label>
+                                        <!--Basic textarea-->
+                                        <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <textarea  name="note_body" id="form16" class="md-textarea form-control" rows="4" placeholder="Notu yazınız."></textarea>
+                                        </div><br>
+                                        <button name="add_note" type="submit" class="btn btn-primary float-right">Not Ekle</button>
+                                    </form>
+                                </div>
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="navbar navbar-dark bg-dark shadow-sm">
+                    <div class="container d-flex justify-content-between">
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                         <strong>Not Ekle</strong>
+                    </a>
+                    <button   class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    </div>
+                </div>
+            </header>
+
+
+
+
+     <main role="main">
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+         
+          <div class="row">
+          {% for i in notes%}
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+              <div class="card-body bg-warning">
+               <div class="card-header">{{i.note_head}}</div>
+                  <p class="card-text">{{i.note_body}}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <form method="post">
+                      {% csrf_token %}
+                          <input style="display:none" name="note_id" value={{i.id}}>
+                         <button type="submit"  name="delete_note" class="btn btn-sm btn-outline-secondary bg-info text-white">Notu Sil</button>
+                      </form>
+                    </div>
+                    <small class="text-muted">{{i.date_time}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+            </div>
+           
+        </div>
+      </div>
+
+   </main>
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>Steela</h4>
+    <p>Powered by <a href="" target="_blank">@Steela</a></p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+</div>
+
+
+
+
+</body>

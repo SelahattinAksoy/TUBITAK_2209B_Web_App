@@ -1,0 +1,201 @@
+{% include 'temp/temp.html'   %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">Nasıl Kullanabilirim</h4>
+              
+              <p class="text-muted">Soldaki Tablodan Personelinizi Seçip Sonra Sağ taraftaki sipariş listesinden Personelin teslim etmek istediği Siaparişi Seçebilitrisan</p>
+              <p class="text-muted">Bu işlemi yaptıktan sonra sipariş kutuları ve teslim edecek personeli oluşturmuş oluyorsunuz.Depo yönetim panelinden Depoyu seçtikten sonra sipariş hazır olduğunda depo personeli şipariş teslim edebilir. </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">İletişim</h4>
+              <ul class="list-unstyled">
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm ">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+             <strong>Bilgilendirme: Bu Modülü Nasıl Kullanabilirim.</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+
+
+     
+        <div class="d-md-flex">
+            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-width: 560px; max-height: 500px;">
+                <div class="card-header text-center bg-primary text-white"> Personel Listesi</div>
+                <div align="center">  
+                     <input type="text" name="search" id="search2" class="form-control" placeholder="Ara"/> 
+
+                </div>
+                <form method="POST">
+                      <table class="table table-striped table-dark table-hover">
+                                          
+                          <thead>
+                              <tr>
+                              <th>Personel Seç</th>
+                              <th>Personel İsmi</th>
+                              <th>Personel Soyismi</th>
+                              <th>Departman</th>
+                            
+                              </tr>
+                          </thead>
+
+                          <tbody>
+
+                          
+                              {% for i,j in dict_workers.items%}
+                              <tr>
+                              
+                              <td><input style="width:20px; height:20px" type="checkbox" name="worker_inputs" value="{{i}}" class=""></td>
+                              
+                              <td>{{j.first_name}}</td>
+                              <td>{{j.last_name}}</td>
+                              <td>{{j.department}}</td>
+                              <td><button class="btn btn-success">Detay</button></td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+                  
+            </div>
+
+            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-width: auto; max-height: 500px;">
+                  <div class="card-header text-center bg-primary text-white"> Sipariş Listesi</div>
+                   <div align="center">  
+                     <input type="text" name="search" id="search" class="form-control"  placeholder="Ara"/> 
+
+                </div>
+                 <th scope="col"><button onclick="selectAll()" class="btn btn-info">Hepsini Seç</button></th>  
+                  <table class="table table-striped table-dark table-hover" id="order_table">
+                     
+                      <thead>
+                          <tr>
+                         
+                          <th scope="col"> Ürünü Seç</th>
+                          <th scope="col">Ürün İsmi</th>
+                          <th scope="col">Siapriş Miktarı</th>
+                          <th scope="col">Müşteri ismi</th>
+                          <th scope="col">Müşteri adresi</th>
+                          <th scope="col">Sipaeirş tarihi</th>
+                          <th scope="col">Sipariş Kodu</th>
+                          </tr>
+                      </thead>
+
+                      <tbody >
+
+                           {% for i,j in order_dict.items%}
+                          <tr>
+                            
+                          <td><input style="width:20px; height:20px" type="checkbox" name="orders_input" value="{{i}}" class="select"></td>
+                        
+                          <td>{{j.product_name}}</td>
+                          <td>{{j.product_amount}}</td>
+                          <td>{{j.customer_name}}</td>
+                          <td>{{j.customer_address}}</td>
+                          <td>{{j.product_date}}</td>
+                            <td>{{i}}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+            </div>
+    
+        </div>
+       
+        {% csrf_token %}
+         <div align="center">  
+                     <input type="text" name="box_name"  class="form-control  text-center"  placeholder="Buraya Sipariş Kutu isimini Yazınız" required/> 
+
+                </div>
+          
+          <button type="submit" class="btn btn-info btn-block"> Kaydet</button>
+        </form>
+    
+
+          
+
+
+   
+
+
+ </div>
+
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>FOOTER</h4>
+    <p>Powered by <a href="" target="_blank">Steela</a></p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+
+
+
+
+
+
+
+</body>
+<script>  
+      $(document).ready(function(){  
+           $('#search').keyup(function(){  
+                search_table($(this).val());  
+           });  
+           function search_table(value){  
+                $('#order_table tr').each(function(){  
+                     var found = 'false';  
+                     $(this).each(function(){  
+                          if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)  
+                          {  
+                               found = 'true';  
+                          }  
+                     });  
+                     if(found == 'true')  
+                     {  
+                          $(this).show();  
+                     }  
+                     else  
+                     {  
+                          $(this).hide();  
+                     }  
+                });  
+           }  
+      });  
+ </script> 
+
+<script>
+
+function selectAll(){
+ 
+  var elements = document.getElementsByClassName('select');
+  for(var i=0; i<elements.length; i++) { 
+      elements[i].checked=true;
+  }
+
+ 
+}
+
+</script>
+
+</html>

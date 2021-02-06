@@ -1,0 +1,340 @@
+{% include 'temp/temp_warehouse.html'   %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+
+     <header>
+      <div class="collapse bg-secondary" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+               <div class="col-sm-8 col-md-7 py-4">
+              
+                        <div style="margin:20px">
+                                <p>Sol Panelden Ürün Arayabilir, güncelleyebilirsiniz.Sağ taraftakide de güncellemelerinizin döktüsü.</p>
+                    </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+             <strong>Nasıl Kullanırım?</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+
+
+     <div class="d-md-flex">
+            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light" style="max-width: 500px; max-height: 550px;">
+               
+    
+                <div class="card-header text-center bg-primary text-white"> Ürün  Listesi</div>
+                          <div align="center">  
+                             <input type="text" name="search" id="search" class="form-control"  placeholder="Ara"/> 
+
+                            </div>
+                            
+                        <section>
+
+                               
+                                <div class="container">
+                                  <h2 style="width:600px">Ürün Girdisi   </h2>
+                                  <div class="card">
+                                    <div class="card-body">Ürün Araması ve Güncellemesi Yapılır.</div>
+                                  </div>
+                                  <br>
+
+                                    {% for i in all_product%}
+                  
+                                                <div  class="card bg-danger text-white search_card">
+                                                  <div class="card-body"><p><strong>Ürün id   : </strong> {{i.id}} <br>
+                                                  <strong>Ürün ismi   : </strong> {{i.product_head}} <br>
+                                                  <strong>Depodaki Miktarı  :</strong> <strong id="{{i.id}}">{{i.product_amount}}</strong> <span>Adet</span>
+                                                  <div class="float-lg-right">
+                                                  
+                                                  <input name="{{i.id}}" type="number" class="form-control" id=""  placeholder="Ürün Miktarı">
+                                                  <button  class="btn btn-success float-lg-right m-2 detay" value="{{i.id}}">Düzenle</button></div>
+                                                  <hr></div>
+                                                  
+                                                </div>
+                                                <br>
+
+                                    {% endfor %}
+
+
+                              
+                                </div>
+
+                      </section>
+                                
+            </div>
+
+            <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light"  style="max-width: auto; max-height: 550px;">
+                  <div class="card-header text-center bg-primary text-white"><p style="width:500px"> Hareket Dökümü</p></div>
+                        <div align="center">  
+                            <input type="text" name="search" id="search_table" class="form-control"  placeholder="Ara"/> 
+                            
+                        </div>
+
+
+                        <section>
+
+
+                                   <table id="table"  class="table table-dark">
+                                    <thead>
+                                      <tr>
+                                      
+                                        <th scope="col">Ürün İd</th>
+                                        <th scope="col">Önceki Miktar</th>
+                                        <th scope="col">Yeni Miktar</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="hareket_documu">
+                                      
+                                      
+                                    </tbody>
+                                  </table>
+                                       
+                          </section>
+                                
+               
+            </div>
+    
+        
+      </div>
+                            
+                                  {% csrf_token %} 
+                         
+                             
+                                  <button id="input_output" name="input_output_raport"  class="btn btn-info btn-block"> Girdi - Çıktı Raporu Çıkart</button>
+                              
+
+
+
+
+    </main>
+
+
+   
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+  <hr>
+    <h4>STEELA</h4>
+    <p class="text-center">Powered by <a href="" target="_blank">@Steela Software</a></p>
+  </footer>
+
+  <!-- End page content -->
+ </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+</body>
+<script>
+
+      $(document).ready(function(){  
+          
+           $('#search').keyup(function(){  
+                
+                search_div($(this).val());  
+           });  
+        
+
+           function search_div(value){  
+                $('.search_card').each(function(){  
+                     var found = 'false';  
+                     $(this).each(function(){  
+                          if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)  
+                          {  
+                               found = 'true';  
+                          }  
+                     });  
+                     if(found == 'true')  
+                     {  
+                          $(this).show();  
+                     }  
+                     else  
+                     {  
+                          $(this).hide();  
+                     }  
+                });  
+           } ;
+
+
+          //Table searh
+          
+           $('#search_table').keyup(function(){  
+                
+                search_table($(this).val());  
+           });  
+        
+
+           function search_table(value){  
+                $('#hareket_documu tr').each(function(){  
+                     var found = 'false';  
+                     $(this).each(function(){  
+                          if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)  
+                          {  
+                               found = 'true';  
+                          }  
+                     });  
+                     if(found == 'true')  
+                     {  
+                          $(this).show();  
+                     }  
+                     else  
+                     {  
+                          $(this).hide();  
+                     }  
+                });  
+           }
+
+
+
+
+      });  
+
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script>
+
+
+
+  
+    var csrf=$("input[name=csrfmiddlewaretoken]").val()
+    $(".detay").click(function (e) {
+      e.preventDefault();
+        var x="#"+$(this).val();
+        var prev= $(x).text()
+        $.ajax({
+
+        url:"",
+        type:"post",
+        data:{
+          id:$(this).val(),
+          value:$('input[name="'+$(this).val()+'"]').val(),
+          csrfmiddlewaretoken:csrf
+        },
+        success:function(data){
+      
+             $(x).text(data.x)
+             $("#hareket_documu").append("<tr> <td>"+x+"</td><td>"+prev+"</td><td>"+data.x+"</td></tr>")
+                     
+        }
+      });
+
+    
+
+    });
+
+
+   $("#input_output").click(function (e) {
+
+        e.preventDefault();
+        var output = [];
+        $('#hareket_documu tr').each(function() {
+        var list=[];
+        $(this).children('td').each(function(){
+             var data = $(this).html();
+             list.push(data);
+        })
+       var obj = {
+        product_id: list[0],
+        first_value: list[1],
+        last_value: list[2],
+      };
+      output.push(obj);
+
+      });
+       var jsonText = JSON.stringify(output);
+       $.ajax({
+
+        url:"",
+        type:"post",
+        data:{
+          value:jsonText,
+          csrfmiddlewaretoken:csrf,
+          action: 'selo'
+        },
+        success:function(data){
+           
+           alert(data.x);
+           $('#hareket_documu').remove();
+        }
+      });
+   });
+
+/*
+    $("#right").on("click","li",function(){
+
+     
+      $('#lc_searchresult > table > tbody > tr').each(function() {
+        $(this).children('td').each(function(){
+          var data = $(this).html();
+        alert(data);
+        })
+
+      });;
+            
+
+
+      $.ajax({
+
+        url:"",
+        type:"post",
+        data:{
+          text:$(this).text(),
+          csrfmiddlewaretoken:csrf
+        },
+        success:function(data){
+
+           alert(data.x);
+        }
+      });
+
+
+    });
+*/
+
+/*
+
+
+  $.ajax({
+        url: '',
+        data:{
+          selo:$(this).val()
+        },
+        method:"GET",
+        success: function (data) {
+            
+            $("#right").append("<li>"+data.second+"</li>")
+            
+          
+        }
+      });
+      */
+   
+
+ 
+  </script>
+</html>

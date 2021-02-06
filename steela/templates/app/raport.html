@@ -1,0 +1,64 @@
+<head>
+<meta charset="UTF-8">
+<style>
+    @page {
+        size: a4 portrait;
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+        }
+        @frame content_frame {          /* Content Frame */
+            left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        }
+    }
+</style>
+</head>
+
+                   
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+        <h2>BeTA TEA</p>
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content"> Sayfa 
+         <pdf:pagecount>
+    </div>
+
+
+    <table>
+    	<tr>
+ 
+    		<th>Toplam Urun</th>
+    		<th>Toplam Calisan</th>
+    		<th>Siparis Sayisi</th>
+            <th>Toplam Siparis Kutusu</th>
+    		<th>Tum Musteri</th>
+    		
+    	
+    	</tr>
+		
+    	<tr>
+ 	     	<td>{{all_products}}</td>
+    		<td> {{workers_num}}</td>
+    		<td>{{order_num}}</td>
+            <td> {{warehouse_box}}</td>
+    		<td>{{all_Customer}}</td>
+    	</tr>
+		
+    	
+    </table>
+
+    <hr>
+
+    <p><strong>{{date}}</strong></p>
+</body>
+
+
+
+</html>

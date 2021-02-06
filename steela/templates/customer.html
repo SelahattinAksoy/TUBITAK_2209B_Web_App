@@ -1,0 +1,104 @@
+{% include 'temp/temp.html'   %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<title>Steela</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<body>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+
+         <header>
+      <div class="collapse bg-secondary" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+               <div class="col-sm-8 col-md-7 py-4">
+              
+                        <div style="margin:20px">
+                         <form method="post">
+                                    {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Müşteri İsmi</label>
+                                            <input name="customer_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Müşteri İsmi" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Müşteri Adresi</label>
+                                            <input name="custemer_address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Müşteri Adresi " required>
+                                        </div>
+                                        <label for="exampleInputEmail1">Müşteri detayı</label>
+                                        <!--Basic textarea-->
+                                        <div class="md-form amber-textarea active-amber-textarea-2">
+                                        <textarea  name="customer_detail" id="form16" class="md-textarea form-control" rows="4" placeholder="Müşteri detayı"></textarea>
+                                        </div><br>
+                                        <button name="add_customer" type="submit" class="btn btn-primary float-right">Müşteri Ekle</button>
+                                    </form>
+                    </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <strong>Müşteri Ekle</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header
+
+
+
+    <main role="main">
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+            {% for obj in obj_list%}
+            <div class="col-md-3">
+              <div class="card mb-3 shadow-sm">
+               <img class="card-img-top" src={{obj.qr_code.url}} alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text"><strong>Müşteri İsmi : </strong>{{obj.name}}</p>
+                   <p class="card-text"><strong>Müşteri Adresi : </strong>{{i.product_price}}₺</p>
+                   <p class="card-text"><strong>Müşteri Detayı : </strong>{{i.product_body}}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <form method="post">
+                          {% csrf_token %}
+                      <input style="display:none" name="customer_id" value={{obj.id}}>
+                      <button name="delete_customer" type="submit" class="btn btn-sm btn-outline-secondary bg-primary text-white">Müşteriyi Sil</button>
+                      </form>
+                    </div>
+                    <small class="text-muted">{{i.date_time}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+</div>
+
+</body>
+
+
+
+
+</html>

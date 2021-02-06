@@ -1,0 +1,157 @@
+{% include 'temp/temp.html'   %}
+<!DOCTYPE html>
+<html>
+<title>Steela</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <br>
+
+    <div  style="margin:35px" class="card-group ">
+            <div class="card text-white bg-warning mb-2 ml-1  " style="max-width: 18rem;">
+            <div class="card-header text-center">Toplam Personel</div>
+            <div class="card-body">
+              <!--  <h5 class="card-title ">Toplam Personel Sayısını Göstermektedir.</h5> -->
+                <canvas id="myChart1" width="400" height="200"></canvas> </div>
+            </div>
+
+
+            <div class="card text-white bg-secondary mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Toplam Sipariş</div>
+            <div class="card-body">
+         <!--      <h5 class="card-title">Alınmış Toplam Siaprişi Göstermektedir.</h5> -->
+               <canvas id="myChart2" width="400" height="200"></canvas></div>
+            </div>
+
+
+            <div class="card text-white bg-primary mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Toplam Not</div>
+            <div class="card-body">
+            <!--    <h5 class="card-title">Toplam Eklediğiniz Not Bulunmaktadır.</h5> -->
+               <canvas id="myChart3" width="400" height="200"></canvas></div>
+             </div>
+             
+           <div class="card text-white bg-success mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Firma Bilgileri</div>
+            {% if user.is_authenticated %}
+       
+            <div class="card-body">
+                    <span>Firma ismi :<br>{{user.username}}</span><br>
+                    <span <strong>Kullanıcı :<br>{{user.first_name}} {{user.last_name}} </strong></span><br>
+                    <span <strong>Kullanıcı Mail :<br>{{user.email}} </strong></span><br>
+             
+             </div>
+              </div>
+               {% endif %}
+  
+    </div>
+    <div  style="margin:35px" class="card-group ">
+            <div class="card text-white bg-primary mb-2 ml-1  " style="max-width: 18rem;">
+            <div class="card-header text-center">Toplam Ürün</div>
+            <div class="card-body">
+             <!--   <h5 class="card-title ">Toplam Personel Sayısını Göstermektedir.</h5> -->
+                <canvas id="myChart4" width="400" height="200"></canvas> </div>
+            </div>
+
+
+            <div class="card text-white bg-success mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Toplam Sipariş Kutusu</div>
+            <div class="card-body">
+      
+               <canvas id="myChart5" width="400" height="200"></canvas></div>
+                <!-- <h5 class="card-title">Alınmış Toplam Siaprişi Göstermektedir.</h5> -->
+            </div>
+
+
+            <div class="card text-white bg-primary mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Toplam Kayıtlı Müşteri</div>
+            <div class="card-body">
+                
+  
+               <canvas id="myChart6" width="400" height="200"></canvas></div>
+             </div>
+             
+           <div class="card text-white bg-dark mb-2 ml-1" style="max-width: 18rem;">
+            <div class="card-header text-center">Rapor Çıkart</div>
+
+       
+            <div class="card-body">
+                    <br><br><br>
+                    <form method="POST" target="_blank">
+                    {% csrf_token %}
+                  <button target="_blank" name="raport_pdf_view" type="submit" class="btn btn-danger btn-block"> Raporu Göster</button>
+                  <button name="raport_pdf_download" type="submit" class="btn btn-danger btn-block">  Raporu İndir</button>
+                    </form>
+             </div>
+              </div>
+         
+  
+    </div>
+</body>
+
+<script>
+
+Chart.pluginService.register({
+    beforeDraw: function (chart) {
+        var width = chart.chart.width,
+            height = chart.chart.height,
+            ctx = chart.chart.ctx;
+        ctx.restore();
+        var fontSize = (height / 114).toFixed(2);
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "middle";
+        var text = chart.config.options.elements.center.text,
+            textX = Math.round((width - ctx.measureText(text).width) / 2),
+            textY = height / 2;
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+    }
+});
+
+var count=1;
+{% for i in liste%}
+
+    id="myChart"+count
+
+    // chart
+    var data = {
+        labels: ["Not Sayısı"],
+        datasets: [{
+            data: [{{i}}],
+            backgroundColor: ["#9400D3"],
+            hoverBackgroundColor: ["#9400D3"]
+        }]
+    };
+    var promisedDeliveryChart = new Chart(document.getElementById(id), {
+        type: 'doughnut',
+        data: data,
+        options: {
+            elements: {
+                center: {
+                    text: {{i}}  //set as you wish
+                }
+            },
+            cutoutPercentage: 75,
+            legend: {
+                display: false
+            }
+        }
+    });
+    count=count+1;
+
+{% endfor %}
+
+
+
+</script>
+
+</html>

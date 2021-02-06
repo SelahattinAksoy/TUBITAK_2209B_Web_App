@@ -1,0 +1,331 @@
+{% include 'temp/temp.html'   %}
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+
+
+<body>
+
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">Garfikler</h4>
+              <p class="text-muted">Siparişler ve Müşterilere Çalışlar ile ilgili grafikler içermektedir.</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Daha Gelişmiş Eklentiler için iletişime Geçiniz</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">@Steela Software</a></li>
+             
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm ">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+             <strong>Bilgilendirme</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="card bg-primary text-white">
+              <div class="card-body">Sipariş ve Firma Analiz Garfikleri</div>
+            </div><br>
+          <div class="row">
+          
+              {% for i in data_names%}
+                    
+                     <div class="col-md-4">
+                    
+                      <div class="card-header bg-warning text-white text-center">
+                      {% if i == "dict_all_customer_count"%}
+                         Müşterilerin Toplam Siparişleri
+
+                      {% elif i == "dict_all_product_count" %}
+                            Ürünlere Göre Sipariş Miktarları
+                      {% elif i == "dict_all_warehouse_count" %}
+                            Mevcut Depo Miktarı
+                      {% elif i == "dict_all_emplooye_count" %}
+                            Tüm Müşteri Sayıları
+                      {% endif %}
+
+                      Garfiği</div>
+                        <div class="card mb-4 shadow-sm">
+                          <canvas id="{{i}}0"  width="400" height="400"></canvas> <div class="card-body">
+                            <p class="card-text">Steela Software Tarafından Geliştirldi. Mühendis Selahattin Aksoy :)</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <div class="btn-group">
+                            
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Görüntüle</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Düzenle</button>
+                              </div>
+                              <small class="text-muted">Steela Software</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card-header bg-warning text-white text-center">
+                        
+                           {% if i == "dict_all_customer_count"%}
+                              Müşterilerin Toplam Siparişleri
+
+                          {% elif i == "dict_all_product_count" %}
+                                Ürünlere Göre Sipariş Miktarları
+                          {% elif i == "dict_all_warehouse_count" %}
+                                Mevcut Depo Miktarı
+                          {% elif i == "dict_all_emplooye_count" %}
+                                Tüm Müşteri Sayıları
+                          {% endif %}
+
+                      
+                        Garfiği</div>
+                          <div class="card mb-4 shadow-sm">
+                            <canvas id="{{i}}1"  width="400" height="400"></canvas> <div class="card-body">
+                              <p class="card-text">Steela Software Tarafından Geliştirldi. Mühendis Selahattin Aksoy :)</p>
+                              <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                              
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">Görüntüle</button>
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">Düzenle</button>
+                                </div>
+                                <small class="text-muted">Steela Software</small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       <div class="col-md-4">
+                        <div class="card-header bg-warning text-white text-center"> 
+                           {% if i == "dict_all_customer_count"%}
+                           Müşterilerin Toplam Siparişleri
+
+                          {% elif i == "dict_all_product_count" %}
+                                Ürünlere Göre Sipariş Miktarları
+                          {% elif i == "dict_all_warehouse_count" %}
+                                Mevcut Depo Miktarı
+                          {% elif i == "dict_all_emplooye_count" %}
+                                Departmana Göre Çalışan Sayısı
+                          {% endif %}
+
+                          Garfiği</div>
+                          <div class="card mb-4 shadow-sm">
+                            <canvas id="{{i}}2"  width="400" height="400"></canvas> <div class="card-body">
+                              <p class="card-text">Steela Software Tarafından Geliştirldi. Mühendis Selahattin Aksoy :)</p>
+                              <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                              
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">Görüntüle</button>
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">Düzenle</button>
+                                </div>
+                                <small class="text-muted">Steela Software</small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+             {% endfor%}
+        
+          </div>
+        </div>
+      </div>
+
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>Steela</h4>
+    <p>Powered by <a href="" target="_blank">@Steela Software</a></p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+
+
+
+
+
+
+
+</body>
+
+
+<script>
+    
+
+
+data=[]
+label=[]
+{% for i,j in dict_all_customer_count.items%} 
+label.push("{{i}}");
+data.push({{j}});
+{% endfor %}
+
+
+
+data2=[]
+label2=[]
+{% for i,j in dict_all_product_count.items%} 
+label2.push("{{i}}");
+data2.push({{j}});
+{% endfor %}
+
+
+data3=[]
+label3=[]
+{% for i,j in dict_all_warehouse_count.items%} 
+label3.push("{{i}}");
+data3.push({{j}});
+{% endfor %}
+
+data4=[]
+label4=[]
+{% for i,j in dict_all_emplooye_count.items%} 
+label4.push("{{i}}");
+data4.push({{j}});
+{% endfor %}
+
+data_list=[]
+label_list=[]
+chart_function_name_list=[]
+
+data_list.push(data);
+data_list.push(data2);
+data_list.push(data3);
+data_list.push(data4);
+
+label_list.push(label);
+label_list.push(label2);
+label_list.push(label3);
+label_list.push(label4);
+
+chart_function_name_list.push(createBarChart);
+chart_function_name_list.push(createPolarCahrt);
+chart_function_name_list.push(createDoughnut);
+
+function createBarChart(id,data,label){
+    var ctx = document.getElementById(id).getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+    
+        labels: label,
+        datasets: [{
+            label: '# Adedi',
+            data: data,
+      
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+};
+
+
+
+function createPolarCahrt(id,data,label){
+    new Chart(document.getElementById(id), {
+    type: 'polarArea',
+    data: {
+      labels: label,
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        data: data
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Garik ve Analiz'
+      }
+    }
+});
+};
+
+
+
+function createDoughnut(id,data,label){
+    new Chart(document.getElementById(id), {
+    type: 'doughnut',
+    data: {
+      labels: label,
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        data: data
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Tüm siparişlerin ürüne ve miktara göre gösterimi'
+      }
+    }
+});
+};
+
+
+var count=0;
+len_data=data_list.length;
+
+{% for i in data_names%}
+ for(var j=0;j<len_data-1;j++){
+   chart_function_name_list[j]("{{i}}"+j,data_list[count],label_list[count]);
+
+
+ };
+  
+
+ count+=1;
+
+
+{% endfor%}
+
+
+
+</script>
+
+
+</html>

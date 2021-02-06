@@ -1,0 +1,72 @@
+
+{% include 'temp/temp.html'   %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+        <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24"></script>
+        <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24"></script>
+</head>
+<style>
+#map {
+    width: 100%;
+    height:700px;
+}
+
+</style>
+<body>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+      <div><button class="btn btn-success btn-block m-2">Sipariş Lokasyonları</div>
+      <div id="map"></div>
+
+
+
+
+</div>
+</div>
+
+    </body>
+        <script type="text/javascript">
+           
+          
+            var map,
+                dir;
+
+            map = L.map('map', {
+                
+                center: [36.9914, 35.3308],
+                zoom: 7
+            })
+                            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+          
+
+            
+
+
+
+
+       {% for i in order_list%}
+               if(typeof {{i.latitude}} === 'number'){
+                    L.marker([{{i.latitude}}, {{i.longitude}}]).addTo(map)
+                    .bindPopup('<h1></h1><table><tr><strong>Müşteri ismi :</strong>{{i.customer_name}}<br> <strong>Sipariş :</strong>{{i.product_name}}</tr></table><hr>  {{i.mail}}')
+                    .openPopup();
+                    console.log({{i.latitude}}, {{i.longitude}})
+                }
+       {% endfor %}
+ 
+
+        </script>
+   
+

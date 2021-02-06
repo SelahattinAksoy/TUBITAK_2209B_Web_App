@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html>
+<head>
+<title>Steela</title>
+
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--Chartjs-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+ 
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right">Steela Software</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvja7c47nWhPWlj_M0SAeqT913PaKL5NO0ZA&usqp=CAU" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+                <!--<p style="margin-left:88px; text-transform: uppercase;" class="navbar-brand"> {% if user.is_authenticated %}{{user.username}}{% endif %}</p>-->
+      {% if user.is_authenticated %}
+     
+          <span <strong>{{user.first_name}} {{user.last_name}}</strong></span><br>
+      {% endif %}
+      
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Dashboard</h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i> Menuyü Kapat</a>
+    <a href="/main" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw" ></i>  Ana Sayfa</a>
+    <a href="/orderlist" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-list"></i>  Sipariş Listesi</a>
+    <a href="/emplooyes" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Personel Listesi</a>
+    <a href="/graphs" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-line-chart"></i>   Analiz</a>
+    <a href="/products" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-diamond fa-fw"></i>  Ürünler</a>
+    <a href="/map/" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-globe"></i>  Personel Takip</a>
+    <a href="/note_list" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-plus"></i> Not Ekle</a>
+    <a href="/order_location" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-globe"></i>  Sipariş Lokasyon</a>
+    <a href="/timeseries" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-globe"></i>  Akıllı Tahminleme</a>
+    <a href="/ordermanagement" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-book"></i>  Sipariş Planlaması</a>
+    <a href="/warehouse" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-industry"></i>  Depo Kontol</a> 
+    <a href="/department" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-building"></i>  Departmanlar</a>
+    <a href="/customer" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-building"></i>  Müşteri Yönetimi</a>
+    <a href="/logout" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-globe"></i>  Çıkış</a>
+    <hr>
+    <strong><p style="margin:10px">@Steela Software Cooperation</p></strong>
+  
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>
